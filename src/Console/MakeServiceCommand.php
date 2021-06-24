@@ -60,7 +60,7 @@ class MakeServiceCommand extends GeneratorCommand
      */
     protected function getNameInput()
     {
-        return parent::getNameInput() . 'Service';
+        return trim($this->argument('name')) . 'Service';
     }
 
     /**
@@ -125,9 +125,7 @@ class MakeServiceCommand extends GeneratorCommand
         return sprintf(
             '$this->app->singleton(\'%s\', function ($app) { 
             return new \%s; 
-        });' . PHP_EOL,
-            $name,
-            $this->qualifyClass('Facades\\' . $name) . '()'
+        });' . PHP_EOL, $name, $this->qualifyClass($this->getNameInput()) . '()'
         );
     }
 
