@@ -17,7 +17,7 @@ abstract class BaseApiService implements BaseApiInterface
      */
     public function __construct()
     {
-        $this->config = config($this->getConfigName());
+        $this->setConfig();
     }
 
     /**
@@ -26,6 +26,13 @@ abstract class BaseApiService implements BaseApiInterface
      * @return string
      */
     abstract function getConfigName();
+
+    /**
+     * Set config
+     */
+    public function setConfig() {
+        $this->config = config($this->getConfigName());
+    }
 
     /**
      * Default query params for all api
@@ -118,12 +125,12 @@ abstract class BaseApiService implements BaseApiInterface
     /**
      * @param $name
      * @param $arguments
-     * @return bool|null
+     * @return array
      */
     public function __call($name, $arguments)
     {
         $this->log(self::class . '@__call', ['$name' => $name, '$arguments' => $arguments]);
-        return $this->execApi($name, $arguments[0]['params'] ?? [], $arguments[0]['path'] ?? '');
+        return $this->execApi($name, $arguments[0] ?? [], $arguments[1] ?? '');
     }
 
     /**

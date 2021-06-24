@@ -14,6 +14,11 @@ interface BaseApiInterface
     function getConfigName();
 
     /**
+     * Set config
+     */
+    public function setConfig();
+
+    /**
      * Default query params for all api
      *
      * @return null
