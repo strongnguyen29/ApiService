@@ -24,7 +24,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "StrongNguyen29\\ApiService\\ApiServiceProvider"
+        "StrongNguyen29\\ApiService\\ApiServiceServiceProvider"
       ],
       "aliases": {
         "Excel": "Maatwebsite\\Excel\\Facades\\Excel"

@@ -70,7 +70,7 @@ class MakeServiceCommand extends GeneratorCommand
 
         $path = base_path('config/' . Str::slug('api-service-' . $this->getNameArg() . '.php'));
         $content = $this->files->get(__DIR__ . '/stubs/config.php.stub');
-        $content = str_replace('{{CONFIG_NAME}}', Str::upper($this->getNameArg()), $content);
+        $content = str_replace('{{CONFIG_NAME}}', Str::upper(Str::snake($this->getNameArg())), $content);
 
         $this->makeDirectory($path);
         $this->files->put($path, $content);
@@ -120,7 +120,9 @@ class MakeServiceCommand extends GeneratorCommand
      */
     protected function getFacadeProviderRegister($name) {
         return sprintf(
-            '$this->app->singleton(\'%s\', function ($app) { return new %s; });',
+            '$this->app->singleton(\'%s\', function ($app) { 
+                return new \%s; 
+            });',
             $name,
             $this->qualifyClass('Facades\\' . $name) . '()'
         );

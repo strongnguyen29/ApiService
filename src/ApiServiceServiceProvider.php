@@ -4,7 +4,7 @@ namespace StrongNguyen29\ApiService;
 
 use Illuminate\Support\ServiceProvider;
 
-class ApiServiceProvider extends ServiceProvider
+class ApiServiceServiceProvider extends ServiceProvider
 {
     /**
      * {@inheritdoc}
