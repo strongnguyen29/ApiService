@@ -25,7 +25,7 @@ abstract class BaseApiService implements BaseApiInterface
      *
      * @return string
      */
-    abstract function getConfigName() : string;
+    abstract function getConfigName();
 
     /**
      * Default query params for all api

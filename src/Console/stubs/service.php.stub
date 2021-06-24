@@ -11,8 +11,8 @@ class DummyClass extends BaseApiService
      *
      * @return string
      */
-    function getConfigName(): string
+    function getConfigName()
     {
-        return '{{CONFIG_FILE_NAME}}'
+        return '{{CONFIG_FILE_NAME}}';
     }
 }
