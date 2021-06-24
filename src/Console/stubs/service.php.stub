@@ -1,9 +1,9 @@
 <?php
 namespace DummyNamespace;
 
-use StrongNguyen29\ApiService\BaseService;
+use StrongNguyen29\ApiService\BaseApiService;
 
-class DummyClass extends BaseService
+class DummyClass extends BaseApiService
 {
 
     /**

@@ -39,11 +39,11 @@ class MakeServiceCommand extends GeneratorCommand
 
         $this->createConfigFile();
 
-        if ($this->option('interface')) {
+        if ($this->hasOption('interface')) {
             $this->createInterface();
-        }
-
-        if ($this->option('facade')) {
+        } elseif ($this->hasOption('facade')) {
+            $this->createFacade();
+        } else {
             $this->createFacade();
         }
     }
