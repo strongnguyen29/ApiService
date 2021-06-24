@@ -1,0 +1,20 @@
+<?php
+namespace DummyNamespace;
+
+
+use Illuminate\Support\Facades\Facade;
+
+
+class DummyClass extends Facade
+{
+    /**
+     * Name of the binding in the IoC container
+     *
+     * @return string
+     */
+    protected static function getFacadeAccessor()
+    {
+        return '{{SERVICE_NAME}}';
+    }
+
+}

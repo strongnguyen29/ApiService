@@ -1,0 +1,16 @@
+<?php
+
+return [
+    'main_url' => env('API_{{CONFIG_NAME}}_URL', ''),
+    'api_token' => env('API_{{CONFIG_NAME}}_TOKEN', ''),
+    'api_secret' => env('API_{{CONFIG_NAME}}_SECRET', ''),
+    'endpoints' => [
+        'getProduct' => [
+            'method' => 'get',
+            'path' => '/v1/products/detail',
+            'params' => [
+                'slug' => 'required|string'
+            ]
+        ],
+    ]
+];

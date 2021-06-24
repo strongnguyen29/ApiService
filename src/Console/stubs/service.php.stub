@@ -1,0 +1,18 @@
+<?php
+namespace DummyNamespace;
+
+use StrongNguyen29\ApiService\BaseService;
+
+class DummyClass extends BaseService
+{
+
+    /**
+     * get Array register api endpoint
+     *
+     * @return string
+     */
+    function getConfigName(): string
+    {
+        // TODO: Implement getConfigName() method.
+    }
+}

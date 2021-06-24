@@ -1,0 +1,34 @@
+{
+  "name": "strongnguyen29/apiservice",
+  "description": "Base service call micro services api",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Strong Nguyen",
+      "email": "strongnguyenapp@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4|^8.0",
+    "illuminate/support": "^6.0|^7.0|^8.0",
+    "illuminate/console": "^6.0|^7.0|^8.0",
+    "firebase/php-jwt": "^5.2",
+    "guzzlehttp/guzzle": "^7.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "StrongNguyen29\\ApiService\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "StrongNguyen29\\ApiService\\ApiServiceProvider"
+      ],
+      "aliases": {
+        "Excel": "Maatwebsite\\Excel\\Facades\\Excel"
+      }
+    }
+  }
+}
