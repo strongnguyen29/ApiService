@@ -125,7 +125,7 @@ class MakeServiceCommand extends GeneratorCommand
         return sprintf(
             '$this->app->singleton(\'%s\', function ($app) { 
                 return new \%s; 
-            });',
+        });' . PHP_EOL,
             $name,
             $this->qualifyClass('Facades\\' . $name) . '()'
         );
