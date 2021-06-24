@@ -67,10 +67,13 @@ class MakeServiceCommand extends GeneratorCommand
      * Create api endpoint config file
      */
     protected function createConfigFile() {
+        $snakeName = Str::snake($this->getNameArg());
 
-        $path = base_path('config/' . Str::slug('api-service-' . $this->getNameArg() . '.php'));
+        $path = base_path('config/api_service_' . $snakeName) . '.php';
+
         $content = $this->files->get(__DIR__ . '/stubs/config.php.stub');
-        $content = str_replace('{{CONFIG_NAME}}', Str::upper(Str::snake($this->getNameArg())), $content);
+
+        $content = str_replace('{{CONFIG_NAME}}', Str::upper($snakeName), $content);
 
         $this->makeDirectory($path);
         $this->files->put($path, $content);
