@@ -19,6 +19,7 @@ class ApiServiceServiceProvider extends ServiceProvider
     public function boot() {
         if ($this->app->runningInConsole()) {
             $this->commands([
+                \StrongNguyen29\ApiService\Console\InstallCommand::class,
                 \StrongNguyen29\ApiService\Console\MakeServiceCommand::class,
                 \StrongNguyen29\ApiService\Console\MakeServiceInterfaceCommand::class,
                 \StrongNguyen29\ApiService\Console\MakeServiceFacadeCommand::class
@@ -26,7 +27,7 @@ class ApiServiceServiceProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__. '/../Providers' => base_path('app/Providers'),
+            __DIR__. '/../Providers/ApiServiceProvider.php.stub' => base_path('app/Providers/ApiServiceProvider.php'),
         ], 'service');
     }
 }

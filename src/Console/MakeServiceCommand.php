@@ -124,7 +124,7 @@ class MakeServiceCommand extends GeneratorCommand
     protected function getFacadeProviderRegister($name) {
         return sprintf(
             '$this->app->singleton(\'%s\', function ($app) { 
-                return new \%s; 
+            return new \%s; 
         });' . PHP_EOL,
             $name,
             $this->qualifyClass('Facades\\' . $name) . '()'
