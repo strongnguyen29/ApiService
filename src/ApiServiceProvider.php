@@ -1,8 +1,8 @@
 <?php
 
+namespace StrongNguyen29\ApiService;
 
 use Illuminate\Support\ServiceProvider;
-use Laravel\Lumen\Application as LumenApplication;
 
 class ApiServiceProvider extends ServiceProvider
 {

@@ -1,8 +1,7 @@
 <?php
 
 
-namespace StrongNguyen29\ApiService;
-
+namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
