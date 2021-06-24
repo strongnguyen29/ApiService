@@ -34,8 +34,11 @@ class MakeServiceCommand extends GeneratorCommand
     public function handle()
     {
         if (parent::handle() === false) {
+            $this->error('Create Failed');
             return false;
         }
+
+        $this->replaceContentService();
 
         $this->createConfigFile();
 
@@ -46,6 +49,25 @@ class MakeServiceCommand extends GeneratorCommand
         } else {
             $this->createFacade();
         }
+    }
+
+    /**
+     *
+     */
+    protected function replaceContentService() {
+        // Get the fully qualified class name (FQN)
+        $class = $this->qualifyClass($this->getNameInput());
+
+        // get the destination path, based on the default namespace
+        $path = $this->getPath($class);
+
+        $content = file_get_contents($path);
+
+        // Update name binding
+        $content = str_replace('{{CONFIG_FILE_NAME}}', $this->getConfigFileName(), $content);
+
+        file_put_contents($path, $content);
+        $this->info('Create ' . $class . ' OK');
     }
 
     /**
@@ -64,16 +86,21 @@ class MakeServiceCommand extends GeneratorCommand
     }
 
     /**
+     * @return string
+     */
+    protected function getConfigFileName() {
+        return 'api_service_' . Str::snake($this->getNameArg());
+    }
+
+    /**
      * Create api endpoint config file
      */
     protected function createConfigFile() {
-        $snakeName = Str::snake($this->getNameArg());
-
-        $path = base_path('config/api_service_' . $snakeName) . '.php';
+        $path = base_path('config/' . $this->getConfigFileName()) . '.php';
 
         $content = $this->files->get(__DIR__ . '/stubs/config.php.stub');
 
-        $content = str_replace('{{CONFIG_NAME}}', Str::upper($snakeName), $content);
+        $content = str_replace('{{CONFIG_NAME}}', Str::upper(Str::snake($this->getNameArg())), $content);
 
         $this->makeDirectory($path);
         $this->files->put($path, $content);
