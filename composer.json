@@ -1,5 +1,6 @@
 {
   "name": "strongnguyen29/apiservice",
+  "type": "library",
   "description": "Base service call micro services api",
   "minimum-stability": "dev",
   "license": "MIT",
