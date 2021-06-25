@@ -60,7 +60,7 @@ abstract class BaseApiService implements BaseApiInterface
      * @param string $pathData
      * @return array|null
      */
-    public function execApi($action, $params, $pathData = '') {
+    public function execApi($action, $params, $pathData = []) {
         try {
             if (!isset($this->config['endpoints'][$action]['path'])) {
                 $this->log(self::class . '@execApi: ' . $action . ' | Error: endpoint not defined');
@@ -68,8 +68,9 @@ abstract class BaseApiService implements BaseApiInterface
             }
 
             // get url
-            $pathUrl = $this->config['endpoints'][$action]['path'];
-            $url = sprintf('%s/%s/%s', $this->config['main_url'], $pathUrl, $pathData);
+            $path = $this->config['endpoints'][$action]['path'];
+            $path = $this->replacePathData($path, $pathData);
+            $url = sprintf('%s/%s', $this->config['main_url'], $path);
             $url = preg_replace('/([^:])(\/{2,})/', '$1/', $url);
 
             if ($defaultParams = $this->getQueryParamDefault()) {
@@ -131,6 +132,33 @@ abstract class BaseApiService implements BaseApiInterface
     {
         $this->log(self::class . '@__call', ['$name' => $name, '$arguments' => $arguments]);
         return $this->execApi($name, $arguments[0] ?? [], $arguments[1] ?? '');
+    }
+
+    /**
+     * Replace bien trong url path
+     *
+     * @param $path
+     * @param $data
+     * @return
+     */
+    protected function replacePathData($path, $data) {
+
+        if (preg_match_all('/{(\w+)}/', $path, $matches)) {
+
+            $search = $matches[0];
+            $paramKeys = $matches[1];
+            $replace = [];
+
+            foreach ($paramKeys as $key) {
+                if (!isset($data[$key])) {
+                    throw new Exception('Không đủ tham số path data');
+                }
+                $replace[] = $data[$key];
+            }
+
+            return str_replace($search, $replace, $path);
+        }
+        return $path;
     }
 
     /**
