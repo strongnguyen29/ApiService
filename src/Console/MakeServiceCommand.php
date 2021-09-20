@@ -166,4 +166,16 @@ class MakeServiceCommand extends GeneratorCommand
             $this->qualifyClass($this->getNameInput())
         );
     }
+    
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['interface', 'i', InputOption::VALUE_OPTIONAL, 'The binding with interface'],
+        ];
+    }
 }
