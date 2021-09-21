@@ -163,7 +163,7 @@ class MakeServiceCommand extends GeneratorCommand
     protected function getInterfaceProviderRegister($name) {
         return sprintf('$this->app->singleton(\%s, \%s);',
             $this->qualifyClass('Contracts\\' . $name) . '::class',
-            $this->qualifyClass($this->getNameInput())
+            $this->qualifyClass($this->getNameInput()) . '::class'
         );
     }
     
