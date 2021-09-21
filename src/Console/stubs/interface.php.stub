@@ -3,7 +3,7 @@ namespace DummyNamespace;
 
 use StrongNguyen29\ApiService\BaseApiInterface;
 
-interface DummyClass extend BaseApiInterface
+interface DummyClass extends BaseApiInterface
 {
 
 }
