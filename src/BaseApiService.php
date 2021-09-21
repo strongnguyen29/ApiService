@@ -109,14 +109,8 @@ abstract class BaseApiService implements BaseApiInterface
                 'request' => ['url' => $url, 'params' => $params],
                 'response' => $response->body()
             ]);
-
-            if ($response->successful()) {
-                $data = $response->json();
-                if (isset($data['success']) && $data['success']) {
-                    return isset($data['data']) ? $data['data'] : true;
-                }
-            }
-            return null;
+            
+            return $this->apiResponse($response);
         } catch (\Exception $e) {
             Log::error(self::class . '@execApi error: ' . $e->getMessage());
             return null;
@@ -132,6 +126,21 @@ abstract class BaseApiService implements BaseApiInterface
     {
         $this->log(self::class . '@__call', ['$name' => $name, '$arguments' => $arguments]);
         return $this->execApi($name, $arguments[0] ?? [], $arguments[1] ?? '');
+    }
+    
+    /**
+     * Process response data
+     * 
+     * @param $response \Illuminate\Http\Client\Response
+     */
+    protected function apiResponse($response) {
+        if ($response->successful()) {
+            $data = $response->json();
+            if (isset($data['success']) && $data['success']) {
+                return isset($data['data']) ? $data['data'] : true;
+            }
+        }
+        return null;
     }
 
     /**
