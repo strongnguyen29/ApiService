@@ -3,6 +3,7 @@ namespace StrongNguyen29\ApiService\Console;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Input\InputOption;
 
 class MakeServiceCommand extends GeneratorCommand
 {
