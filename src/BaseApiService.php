@@ -60,7 +60,7 @@ abstract class BaseApiService implements BaseApiInterface
      * @param string $pathData
      * @return array|null
      */
-    public function execApi($action, $params, $pathData = []) {
+    public function execApi($action, $params, $pathData = [], $responseRaw = false) {
         try {
             if (!isset($this->config['endpoints'][$action]['path'])) {
                 $this->log(self::class . '@execApi: ' . $action . ' | Error: endpoint not defined');
@@ -109,7 +109,7 @@ abstract class BaseApiService implements BaseApiInterface
                 'request' => ['url' => $url, 'params' => $params],
                 'response' => $response->body()
             ]);
-            
+            if($responseRaw) return $response;
             return $this->apiResponse($response);
         } catch (\Exception $e) {
             Log::error(self::class . '@execApi error: ' . $e->getMessage());
